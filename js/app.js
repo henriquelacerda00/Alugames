@@ -1,30 +1,32 @@
-let jogosAlugados = 0;
+let jogosAlugados = 0; 
 
 function alterarStatus(id){
     let jogoClicado = document.getElementById(`game-${id}`);
-    let imagem = jogoClicado.querySelector('.dashboard__item__img')
-    let botao = jogoClicado.querySelector('.dashboard__item__button')
-    let nomeJogo = jogoClicado.querySelector('.dashboard__item__name')
+    let imagem = jogoClicado.querySelector('.dashboard__item__img');
+    let botao = jogoClicado.querySelector('.dashboard__item__button');
+    let nomeDoJogo = jogoClicado.querySelector('.dashboard__item__name');
 
     if(imagem.classList.contains('dashboard__item__img--rented')){
+        if(confirm(`Tem certeza que deseja devolver o jogo: ${nomeDoJogo.innerHTML}`)){
         imagem.classList.remove('dashboard__item__img--rented')
         botao.classList.remove('dashboard__item__button--return')
-        botao.textContent = 'Alugar'
+        botao.innerHTML = 'Alugar'
         jogosAlugados--;
-    }
+    }}
     else{
-        imagem.classList.add('dashboard__item__img--rented')
-        botao.classList.add('dashboard__item__button--return')
-        botao.textContent = 'Devolver'
+        imagem.classList.add('dashboard__item__img--rented');
+        botao.classList.add('dashboard__item__button--return');
+        botao.innerHTML = 'Devolver';
         jogosAlugados++;
     }
-    contarJogosAlugados();
+    contarEexibirAlugados()
 }
-document.addEventListener('DOMContentLoaded',function(){
+
+document.addEventListener('DOMContentLoaded', function(){
     jogosAlugados = document.querySelectorAll('.dashboard__item__img--rented').length;
-    contarJogosAlugados();
+    contarEexibirAlugados()
 });
 
-function contarJogosAlugados(){
-    console.log(`jogos alugados: ${jogosAlugados}`)
+function contarEexibirAlugados(){
+    console.log(`Jogos alugados:${jogosAlugados}`)
 }
